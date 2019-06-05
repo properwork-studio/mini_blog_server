@@ -1,0 +1,136 @@
+package com.lauren.miniblog.dao;
+
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.lauren.miniblog.model.Post;
+
+public class PostDAO {
+	
+	private static final String INSERT_POSTS_SQL = "INSERT INTO posts" + "  (post_title, post_categories, post_content, post_image) VALUES "
+			+ " (?, ?, ?, ?);";
+
+	private static final String SELECT_POST_BY_ID = "select post_id,post_title,post_categories,post_content,post_image from posts where post_id =?";
+	private static final String SELECT_ALL_POSTS = "select * from posts";
+	private static final String DELETE_POSTS_SQL = "delete from posts where post_id = ?;";
+	private static final String UPDATE_POSTS_SQL = "update posts set post_title = ?,post_categories= ?, post_content =?, post_image =? where post_id = ?;";
+	
+	public PostDAO() {
+		
+	}
+	
+	public void insertPost(Connection con, Post post) throws SQLException {
+		System.out.println(INSERT_POSTS_SQL);
+		// try-with-resource statement will auto close the connection.
+		try (
+			PreparedStatement preparedStatement = con.prepareStatement(INSERT_POSTS_SQL)) {
+			preparedStatement.setString(1, post.getPostTitle());
+			preparedStatement.setString(2, post.getPostCategories());
+			preparedStatement.setString(3, post.getPostContent());
+			preparedStatement.setBlob(4, post.getPostImage());
+			System.out.println(preparedStatement);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+	}
+	
+	public Post selectPost(Connection con, int id) {
+		Post post = null;
+		try (
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_POST_BY_ID);) {
+			preparedStatement.setInt(1, id);
+			System.out.println(preparedStatement);
+			// Step: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+
+			// Step: Process the ResultSet object.
+			while (rs.next()) {
+				String postTitle = rs.getString("post_title");
+				String postCategories = rs.getString("post_categories");
+				String postContent = rs.getString("post_content");
+				Blob postImage = rs.getBlob("post_image");
+				post = new Post(id, postTitle, postCategories, postContent, postImage);
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return post;
+	}
+	
+	public List<Post> selectAllPosts(Connection con) {
+
+		// using try-with-resources to avoid closing resources (boiler plate code)
+		List<Post> posts = new ArrayList<>();
+		try (
+			// Step :Create a statement using connection object
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_POSTS);) {
+			System.out.println(preparedStatement);
+			// Step : Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+
+			// Step : Process the ResultSet object.
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String postTitle = rs.getString("post_title");
+				String postCategories = rs.getString("post_categories");
+				String postContent = rs.getString("post_content");
+				Blob postImage = rs.getBlob("post_image");
+				posts.add(new Post(id, postTitle, postCategories, postContent, postImage));
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return posts;
+	}
+	
+	public boolean deletePost(Connection con, int id) throws SQLException {
+		boolean rowDeleted;
+		try (
+			PreparedStatement statement = con.prepareStatement(DELETE_POSTS_SQL);) {
+			statement.setInt(1, id);
+			rowDeleted = statement.executeUpdate() > 0;
+		}
+		return rowDeleted;
+	}
+	
+	public boolean updatePost(Connection con, Post post) throws SQLException {
+		boolean rowUpdated;
+		try (
+			PreparedStatement statement = con.prepareStatement(UPDATE_POSTS_SQL);) {
+			statement.setString(1, post.getPostTitle());
+			statement.setString(2, post.getPostCategories());
+			statement.setString(3, post.getPostContent());
+			statement.setBlob(4, post.getPostImage());
+			statement.setInt(5, post.getPostID());
+
+			rowUpdated = statement.executeUpdate() > 0;
+		}
+		return rowUpdated;
+	}
+	
+	
+	
+//  ================================================================================================  //
+	
+	private void printSQLException(SQLException ex) {
+		for (Throwable e : ex) {
+			if (e instanceof SQLException) {
+				e.printStackTrace(System.err);
+				System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+				System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+				System.err.println("Message: " + e.getMessage());
+				Throwable t = ex.getCause();
+				while (t != null) {
+					System.out.println("Cause: " + t);
+					t = t.getCause();
+				}
+			}
+		}
+	}
+}

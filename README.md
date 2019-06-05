@@ -18,3 +18,16 @@
   >>1) create: Creating post...(using wysiwyg editor)
   >>2) edit: Editing post(need to fill out all original data in the fields)
   >11) profile.jsp: To edit the author profile
+
+##### Java source code 
+  > com.lauren.miniblog.dao - <b>Maybe still needs some adjustment</b>
+  >> -- UserDAO.java
+  >> -- PostDAO.java
+  >> -- DBConnection.java - A ServletContext Listener to set database connection into ServletContext object
+  > com.lauren.miniblog.model - <b>Maybe still needs some adjustment</b>
+  >> -- User.java
+  >> -- Post.java
+
+
+##### WebContent/WEB-INF/lib
+  > Adding jar files from tutorial project - <b>Maybe needs to adjust some version of jar file</b>
