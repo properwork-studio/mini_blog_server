@@ -17,3 +17,4 @@
   >>  (the footer.jsp needs to determine weither to generate a different footer for form page)
   >>1) create: Creating post...(using wysiwyg editor)
   >>2) edit: Editing post(need to fill out all original data in the fields)
+  >11) profile.jsp: To edit the author profile
