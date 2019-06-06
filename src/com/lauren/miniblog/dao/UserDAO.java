@@ -12,10 +12,10 @@ import com.lauren.miniblog.model.User;
 
 public class UserDAO {
 
-	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (username, password, email) VALUES "
+	private static final String INSERT_USERS_SQL = "INSERT INTO Users" + "  (username, user_password, email) VALUES "
 			+ " (?, ?, ?);";
 
-	private static final String SELECT_USER_BY_ID = "select user_id,username,password,email,nickname,introduction,user_image from users where user_id =?";
+	private static final String SELECT_USER_BY_ID = "select user_id,username,user_password,email,nickname,introduction,user_image from users where user_id =?";
 	private static final String SELECT_ALL_USERS = "select * from users";
 	private static final String DELETE_USERS_SQL = "delete from users where user_id = ?;";
 	private static final String UPDATE_USERS_SQL = "update users set nickname = ?,email= ?, introduction =?, user_image =? where user_id = ?;";

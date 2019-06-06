@@ -12,7 +12,7 @@ import com.lauren.miniblog.model.Post;
 
 public class PostDAO {
 	
-	private static final String INSERT_POSTS_SQL = "INSERT INTO posts" + "  (post_title, post_categories, post_content, post_image) VALUES "
+	private static final String INSERT_POSTS_SQL = "INSERT INTO Posts" + "  (post_title, post_categories, post_content, post_image) VALUES "
 			+ " (?, ?, ?, ?);";
 
 	private static final String SELECT_POST_BY_ID = "select post_id,post_title,post_categories,post_content,post_image from posts where post_id =?";
