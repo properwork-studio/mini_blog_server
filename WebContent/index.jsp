@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<%@ include file="header.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:import url="header.jsp"/>
 
     <div class="jumbotron jumbotron-fluid mb-2">
       <div class="container">
@@ -59,4 +60,4 @@
       <a href="list.html" class="btn btn-outline-primary mb-4 align-self-end px-3">See all posts</a>
     </div>
 
-    <%@ include file="footer.jsp" %>
+<c:import url="footer.jsp"/>

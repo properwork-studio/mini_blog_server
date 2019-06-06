@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,13 @@
 <body>
     <nav class="navbar navbar-dark bg-primary">
       <div class="container">
-        <a class="navbar-brand mb-0 h1" href="index.html">Mini Blog</a>
+        <a class="navbar-brand mb-0 h1 mr-auto" href="index.html">Mini Blog</a>
+        <%
+        	String username = (String)session.getAttribute("currentUser");
+        	if(username != null && !username.equals("")) {
+        		out.print("<h6 class=\"mb-0 text-white\">Welcome back, " + username + "</h6>");
+        		out.print("<a href=\"login.jsp\" class=\"btn btn-outline-secondary px-3 mb-0 ml-3\">Logout</a>");
+        	}
+        %>
       </div>
     </nav>

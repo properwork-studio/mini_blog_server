@@ -1,11 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<footer class="bg-light p-4 mt-5">
-      <div class="container my-4">
-        <p class="text-center mb-1">If you're author, please login <a href="login.html">here</a></p>
-        <p class="text-center">See more about those author, please check out the <a href="about.html">about us</a> page</p>
-      </div>
-    </footer>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
+    <%
+    	boolean isAdminPage = (Boolean)session.getAttribute("isAdminPage");
+    	String username = (String)session.getAttribute("currentUser");
+    %>
+    <c:choose>
+    	<c:when test="${ isAdminPage }">
+    		<footer class="bg-light py-4 px-4 fixed-bottom">
+			    <div class="container d-flex">
+			      <a href="edit.html" class="btn btn-primary px-3 mb-0 mr-2">Add new post</a>
+			      <a href="profile.html" class="btn btn-primary px-4 mb-0">Edit profile</a>
+			      <a href="index.html" class="btn btn-outline-primary mb-0 px-3 ml-auto">Go back to homepage</a>
+			    </div>
+			  </footer>
+    	</c:when>
+    	<c:otherwise>
+    		<footer class="bg-light p-4 mt-5">
+		      <div class="container my-4">
+		      	<%
+		        	if(username != null && !username.equals("")) {
+		        		out.print("<p class=\"text-center mb-1\">If you want to logout, <a href=\"login.jsp\">here to go</a></p>");
+		        	} else {
+		        		out.print("<p class=\"text-center mb-1\">If you're author, please login <a href=\"login.jsp\">here</a></p>");
+		        	}
+		        %>
+		        <p class="text-center">See more about those author, please check out the <a href="about.html">about us</a> page</p>
+		      </div>
+		    </footer>
+    	</c:otherwise>
+    </c:choose>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
