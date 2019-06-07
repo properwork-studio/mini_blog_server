@@ -23,8 +23,8 @@
   > com.lauren.miniblog.dao - <b>Maybe still needs some adjustment</b>
   >> -- UserDAO.java
   >> -- PostDAO.java
-  >> -- DBConnection.java - A ServletContext Listener to set database connection into ServletContext object
-  > com.lauren.miniblog.model - <b>Maybe still needs some adjustment</b>
+  >> -- DBConnection.java - A ServletContext Listener to set database connection into ServletContext object<br>
+  > com.lauren.miniblog.model - <b>Maybe still needs some adjustment</b><br>
   >> -- User.java
   >> -- Post.java
 
