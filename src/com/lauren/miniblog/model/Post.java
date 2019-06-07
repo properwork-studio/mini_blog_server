@@ -24,6 +24,15 @@ public class Post {
 		this.postImage = postImage;
 	}
 	
+	public Post(String postTitle, String postCategories, String postContent, int authorID, Blob postImage) {
+		super();
+		this.postTitle = postTitle;
+		this.postCategories = postCategories;
+		this.postContent = postContent;
+		this.authorID = authorID;
+		this.postImage = postImage;
+	}
+	
 	public Post(int postID, String postTitle, String postCategories, String postContent, int authorID, Blob postImage) {
 		super();
 		this.postID = postID;

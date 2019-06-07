@@ -16,6 +16,7 @@ public class PostDAO {
 			+ " (?, ?, ?, ?);";
 
 	private static final String SELECT_POST_BY_ID = "select post_id,post_title,post_categories,post_content,post_image from posts where post_id =?";
+	private static final String SELECT_POSTS_BY_AUTHOR_ID = "select post_id,post_title,post_categories,post_content,post_image from posts where author_id =?";
 	private static final String SELECT_ALL_POSTS = "select * from posts";
 	private static final String DELETE_POSTS_SQL = "delete from posts where post_id = ?;";
 	private static final String UPDATE_POSTS_SQL = "update posts set post_title = ?,post_categories= ?, post_content =?, post_image =? where post_id = ?;";
@@ -61,6 +62,32 @@ public class PostDAO {
 			printSQLException(e);
 		}
 		return post;
+	}
+	
+	public List<Post> selectPostsByAuthor(Connection con, int id) {
+
+		// using try-with-resources to avoid closing resources (boiler plate code)
+		List<Post> posts = new ArrayList<>();
+		try (
+			// Step :Create a statement using connection object
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_POSTS_BY_AUTHOR_ID);) {
+			preparedStatement.setInt(1, id);
+			System.out.println(preparedStatement);
+			// Step : Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+
+			// Step : Process the ResultSet object.
+			while (rs.next()) {
+				String postTitle = rs.getString("post_title");
+				String postCategories = rs.getString("post_categories");
+				String postContent = rs.getString("post_content");
+				Blob postImage = rs.getBlob("post_image");
+				posts.add(new Post(id, postTitle, postCategories, postContent, postImage));
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return posts;
 	}
 	
 	public List<Post> selectAllPosts(Connection con) {

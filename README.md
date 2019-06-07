@@ -24,6 +24,7 @@
   >> -- UserDAO.java
   >> -- PostDAO.java
   >> -- DBConnection.java - A ServletContext Listener to set database connection into ServletContext object<br>
+  
   > com.lauren.miniblog.model - <b>Maybe still needs some adjustment</b><br>
   >> -- User.java
   >> -- Post.java
