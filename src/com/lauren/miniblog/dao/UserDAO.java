@@ -15,10 +15,11 @@ public class UserDAO {
 	private static final String INSERT_USERS_SQL = "INSERT INTO Users" + "  (username, user_password, email) VALUES "
 			+ " (?, ?, ?);";
 
-	private static final String SELECT_USER_BY_ID = "select user_id,username,user_password,email,nickname,introduction,user_image from users where user_id =?";
-	private static final String SELECT_ALL_USERS = "select * from users";
-	private static final String DELETE_USERS_SQL = "delete from users where user_id = ?;";
-	private static final String UPDATE_USERS_SQL = "update users set nickname = ?,email= ?, introduction =?, user_image =? where user_id = ?;";
+	private static final String SELECT_USER_BY_ID = "select user_id,username,user_password,email,nickname,introduction,user_image from Users where user_id =?";
+	private static final String SELECT_USER_BY_USERNAME = "select user_id,username,user_password,email,nickname,introduction,user_image from Users where username =?";
+	private static final String SELECT_ALL_USERS = "select * from Users";
+	private static final String DELETE_USERS_SQL = "delete from Users where user_id = ?;";
+	private static final String UPDATE_USERS_SQL = "update Users set nickname = ?,email= ?, introduction =?, user_image =? where user_id = ?;";
 	
 	public UserDAO() {
 		
@@ -26,6 +27,9 @@ public class UserDAO {
 	
 	public void insertUser(Connection con, User user) throws SQLException {
 		System.out.println(INSERT_USERS_SQL);
+		System.out.println(user.getUsername());
+		System.out.println(user.getPassword());
+		System.out.println(user.getEmail());
 		// try-with-resource statement will auto close the connection.
 		try (
 			PreparedStatement preparedStatement = con.prepareStatement(INSERT_USERS_SQL)) {
@@ -63,6 +67,32 @@ public class UserDAO {
 		return user;
 	}
 	
+	public User selectUserByUsername(Connection con, String username) {
+		User user = null;
+		try (
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_USER_BY_USERNAME);) {
+			preparedStatement.setString(1, username);
+			System.out.println(preparedStatement);
+			// Step: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+
+			// Step: Process the ResultSet object.
+			while (rs.next()) {
+				int id = rs.getInt("user_id");
+				String userName = rs.getString("username");
+				String password = rs.getString("user_password");
+				String email = rs.getString("email");
+				String nickname = rs.getString("nickname");
+				String introduction = rs.getString("introduction");
+				Blob userImage = rs.getBlob("user_image");
+				user = new User(id, userName, password, email, nickname, introduction, userImage);
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return user;
+	}
+	
 	public List<User> selectAllUsers(Connection con) {
 
 		// using try-with-resources to avoid closing resources (boiler plate code)
@@ -76,7 +106,7 @@ public class UserDAO {
 
 			// Step : Process the ResultSet object.
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				int id = rs.getInt("user_id");
 				String userName = rs.getString("username");
 				String email = rs.getString("email");
 				String nickname = rs.getString("nickname");

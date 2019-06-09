@@ -15,6 +15,21 @@ public class User {
 		
 	}
 	
+	public User(String username, String email, String password) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public User(int userID, String username, String email, String password) {
+		super();
+		this.userID = userID;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+	
 	public User(int userID, String username, String email, String nickname, String introduction,
 			Blob userImage) {
 		super();

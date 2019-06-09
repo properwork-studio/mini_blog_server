@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<<c:import url="header.jsp"/>
+<%@ page import="com.lauren.miniblog.model.*, java.sql.Blob" %>
+<c:import url="header.jsp"/>
 
 <div class="jumbotron jumbotron-fluid mb-2">
   <div class="container">
@@ -22,33 +23,24 @@
   <div class="authors-content mt-5 mb-5">
     <h2 class="mb-5">All the authors</h2>
     <div class="card-deck">
-      <div class="card">
-        <img src="https://fakeimg.pl/200x100/?retina=1&text=images&font=noto" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title">Tom Lee Jones</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://fakeimg.pl/200x100/?retina=1&text=images&font=noto" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title">Spark Lee</h5>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://fakeimg.pl/200x100/?retina=1&text=images&font=noto" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title">Jimmy Fallon</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
+    	<c:forEach var="user" items="${listAllUsers}">
+    		<div class="card">
+    		<c:if test="${user.getUserImage() != null}">
+    			<img src="showUserImage?user_id=${user.userID}" class="card-img-top">
+    		</c:if>
+    		<c:if test="${user.getUserImage() == null}">
+    			<img src="https://fakeimg.pl/200x100/?retina=1&text=images&font=noto" class="card-img-top">
+    		</c:if>
+	        <div class="card-body">
+	          <h5 class="card-title">${user.nickname}</h5>
+	          <p class="card-text">${user.introduction}</p>
+	          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+	        </div>
+	      </div>
+    	</c:forEach>
     </div>
   </div>
-  <a href="list.html" class="btn btn-outline-primary mb-4 align-self-end px-3">See all posts</a>
+  <a href="list" class="btn btn-outline-primary mb-4 align-self-end px-3">See all posts</a>
 </div>
 
 <c:import url="footer.jsp"/>

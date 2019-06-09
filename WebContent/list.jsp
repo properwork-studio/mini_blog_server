@@ -8,77 +8,23 @@
     <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
     <hr class="my-4">
     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <a class="btn btn-primary btn-lg mt-4" href="about.html" role="button">Learn more</a>
+    <a class="btn btn-primary btn-lg mt-4" href="about" role="button">Learn more</a>
   </div>
 </div>
 
 <div class="container d-flex flex-column">
   <h1 class="my-5">All Posts</h1>
   <div class="post-list">
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">Post title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Post categories</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="single.html" class="card-link">Read more</a>
-      </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">Post title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Post categories</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="single.html" class="card-link">Read more</a>
-      </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">Post title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Post categories</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="single.html" class="card-link">Read more</a>
-      </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">Post title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Post categories</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="single.html" class="card-link">Read more</a>
-      </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">Post title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Post categories</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="single.html" class="card-link">Read more</a>
-      </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">Post title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Post categories</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="single.html" class="card-link">Read more</a>
-      </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">Post title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Post categories</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="single.html" class="card-link">Read more</a>
-      </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">Post title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Post categories</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="single.html" class="card-link">Read more</a>
-      </div>
-    </div>
+  	<c:forEach var="post" items="${listAllPosts}">
+  		<div class="card mb-3">
+	      <div class="card-body">
+	        <h5 class="card-title">${post.postTitle}</h5>
+	        <h6 class="card-subtitle mb-2 text-muted">${post.postCategories}</h6>
+	        <p class="card-text">${post.postContent.substring(0,10)}</p>
+	        <a href="single?post_id=${post.postID}" class="card-link">Read more</a>
+	      </div>
+	    </div>
+  	</c:forEach>
   </div>
 
   <nav class="align-self-center mt-4">

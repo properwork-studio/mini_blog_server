@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,44 +22,60 @@
     </div>
   </nav>
 
-    <form action="admin.html">
+	<c:if test="${currentPost != null}">
+		<form action="update" method="post" enctype="multipart/form-data">
+	</c:if>
+	<c:if test="${currentPost == null}">
+		<form action="add" method="post" enctype="multipart/form-data">
+	</c:if>
       <div class="container">
-        <h3 class="my-5">Now edit - Post title</h3>
+      	<c:if test="${currentPost != null}">
+			<h3 class="my-5">Now edit - ${currentPost.postTitle}</h3>
+		</c:if>
+		<c:if test="${currentPost == null}">
+			<h3 class="my-5">Add a new post</h3>
+		</c:if>
         <div class="form-group row">
           <label for="title" class="col-sm-2 col-form-label">Title</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="title" name="title" placeholder="Enter the post title">
+          	<c:if test="${currentPost != null}">
+				<input type="text" class="form-control" id="title" name="post_title" placeholder="Enter the post title" value="${currentPost.postTitle}">
+				<input type="hidden" name="post_id" value="${currentPost.postID}">
+			</c:if>
+			<c:if test="${currentPost == null}">
+				<input type="text" class="form-control" id="title" name="post_title" placeholder="Enter the post title">
+			</c:if>
           </div>
         </div>
         <div class="form-group row">
           <label for="categorie" class="col-sm-2 col-form-label">Categories</label>
           <div class="col-sm-10">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="heroic" id="heroic" name="categories">
+              <input class="form-check-input" type="checkbox" value="Heroic" id="heroic" name="post_categories" checked>
               <label class="form-check-label" for="heroic">Marvel/DC</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="action" id="action" name="categories">
+              <input class="form-check-input" type="checkbox" value="Action" id="action" name="post_categories">
               <label class="form-check-label" for="action">Action</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="horro" id="horro" name="categories">
-              <label class="form-check-label" for="horro">Horror</label>
+              <input class="form-check-input" type="checkbox" value="Horror" id="horror" name="post_categories">
+              <label class="form-check-label" for="horror">Horror</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="comedy" id="comedy" name="categories">
+              <input class="form-check-input" type="checkbox" value="Comedy" id="comedy" name="post_categories">
               <label class="form-check-label" for="comedy">Comedy</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="fiction" id="fiction" name="categories">
+              <input class="form-check-input" type="checkbox" value="Fiction" id="fiction" name="post_categories">
               <label class="form-check-label" for="fiction">Fiction</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="romance" id="romance" name="categories">
+              <input class="form-check-input" type="checkbox" value="Romance" id="romance" name="post_categories">
               <label class="form-check-label" for="romance">Romance</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="animate" id="animate" name="categories">
+              <input class="form-check-input" type="checkbox" value="Animate" id="animate" name="post_categories">
               <label class="form-check-label" for="animate">Animate</label>
             </div>
           </div>
@@ -66,19 +83,25 @@
         <div class="form-group row">
           <label for="image" class="col-sm-2 col-form-label">Feature Image</label>
           <div class="col-sm-10">
-            <input type="file" class="form-control-file" id="image" name="iamge" placeholder="Upload an feature image for your post...">
+            <input type="file" class="form-control-file" id="image" name="post_image" placeholder="Upload an feature image for your post...">
           </div>
         </div>
         <hr class="my-3 w-100">
         <div class="form-group">
           <h6 class="mb-3 mt-3">Here's where your content goes...</h6>
-          <textarea id="editor" name="content"></textarea>
-          <script>var editor = new Jodit('#editor');</script>
+          <c:if test="${currentPost != null}">
+				<textarea id="editor" name="post_content" value="${currentPost.postContent}">${currentPost.postContent}</textarea>
+				<script>var editor = new Jodit('#editor');</script>
+			</c:if>
+			<c:if test="${currentPost == null}">
+				<textarea id="editor" name="post_content"></textarea>
+          		<script>var editor = new Jodit('#editor');</script>
+			</c:if>
         </div>
         <footer class="bg-light p-4 mt-5 fixed-bottom">
           <div class="container d-flex flex-column">
             <div class="btn-group align-self-end mb-0">
-              <a href="admin.html" class="btn btn-outline-primary px-4 mr-2">Cancel</a>
+              <a href="admin" class="btn btn-outline-primary px-4 mr-2">Cancel</a>
               <button type="submit" class="btn btn-primary px-4">Post it</button>
             </div>
           </div>

@@ -15,7 +15,7 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class DBConnection implements ServletContextListener {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost:3306/mBlog?useSSL=false&serverTimezone=CST";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/demo?useSSL=false&serverTimezone=CST";
 	static final String USER = "root";
 	static final String PASSWORD = "lomo81818";
     /**
@@ -41,7 +41,7 @@ public class DBConnection implements ServletContextListener {
     		Class.forName(JDBC_DRIVER);
     		Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
     		ServletContext ctx = sce.getServletContext();
-    		ctx.setAttribute("dbConnection", con);
+    		ctx.setAttribute("dbconnection", con);
     	} catch(Exception e) {
     		e.printStackTrace();
     	}

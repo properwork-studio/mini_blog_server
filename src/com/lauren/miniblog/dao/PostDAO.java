@@ -12,14 +12,14 @@ import com.lauren.miniblog.model.Post;
 
 public class PostDAO {
 	
-	private static final String INSERT_POSTS_SQL = "INSERT INTO Posts" + "  (post_title, post_categories, post_content, post_image) VALUES "
-			+ " (?, ?, ?, ?);";
+	private static final String INSERT_POSTS_SQL = "INSERT INTO Posts" + "  (post_title, post_categories, post_content, post_image, author_id) VALUES "
+			+ " (?, ?, ?, ?, ?);";
 
-	private static final String SELECT_POST_BY_ID = "select post_id,post_title,post_categories,post_content,post_image from posts where post_id =?";
-	private static final String SELECT_POSTS_BY_AUTHOR_ID = "select post_id,post_title,post_categories,post_content,post_image from posts where author_id =?";
-	private static final String SELECT_ALL_POSTS = "select * from posts";
-	private static final String DELETE_POSTS_SQL = "delete from posts where post_id = ?;";
-	private static final String UPDATE_POSTS_SQL = "update posts set post_title = ?,post_categories= ?, post_content =?, post_image =? where post_id = ?;";
+	private static final String SELECT_POST_BY_ID = "SELECT post_id,post_title,post_categories,post_content,post_image FROM Posts WHERE post_id =?";
+	private static final String SELECT_POSTS_BY_AUTHOR_ID = "SELECT post_id,post_title,post_categories,post_content,post_image FROM Posts WHERE author_id =?";
+	private static final String SELECT_ALL_POSTS = "SELECT * FROM Posts";
+	private static final String DELETE_POSTS_SQL = "DELETE FROM Posts WHERE post_id = ?;";
+	private static final String UPDATE_POSTS_SQL = "UPDATE Posts SET post_title = ?,post_categories= ?, post_content =?, post_image =? WHERE post_id = ?;";
 	
 	public PostDAO() {
 		
@@ -34,6 +34,7 @@ public class PostDAO {
 			preparedStatement.setString(2, post.getPostCategories());
 			preparedStatement.setString(3, post.getPostContent());
 			preparedStatement.setBlob(4, post.getPostImage());
+			preparedStatement.setInt(5, post.getAuthorID());
 			System.out.println(preparedStatement);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -78,11 +79,12 @@ public class PostDAO {
 
 			// Step : Process the ResultSet object.
 			while (rs.next()) {
+				int postID = rs.getInt("post_id");
 				String postTitle = rs.getString("post_title");
 				String postCategories = rs.getString("post_categories");
 				String postContent = rs.getString("post_content");
 				Blob postImage = rs.getBlob("post_image");
-				posts.add(new Post(id, postTitle, postCategories, postContent, postImage));
+				posts.add(new Post(postID, postTitle, postCategories, postContent, postImage));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -103,13 +105,15 @@ public class PostDAO {
 
 			// Step : Process the ResultSet object.
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				int id = rs.getInt("post_id");
 				String postTitle = rs.getString("post_title");
 				String postCategories = rs.getString("post_categories");
 				String postContent = rs.getString("post_content");
 				Blob postImage = rs.getBlob("post_image");
 				posts.add(new Post(id, postTitle, postCategories, postContent, postImage));
 			}
+			
+			System.out.println(posts.size());
 		} catch (SQLException e) {
 			printSQLException(e);
 		}

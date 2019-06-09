@@ -9,6 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.min.css">
   <link rel="stylesheet" href="./css/style.css">
+  <style>
+    	<%@ include file="./css/style.css" %>
+    </style>
   <title>Mini Blog | Sign up</title>
 </head>
 
@@ -18,14 +21,14 @@
       <h1 class="text-uppercase display-4 text-center">Come and join us!</h1>
       <h5 class="text-center">Ready to write some stupid words?</h5>
       <hr class="my-4">
-      <form class="d-flex flex-column" action="/index.html">
+      <form class="d-flex flex-column" action="doSignup">
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" placeholder="Enter your username">
+          <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter your email">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -34,7 +37,7 @@
         <button type="submit" class="btn btn-outline-primary px-5 align-self-end">Sign up</button>
       </form>
       <div class="mt-3 d-flex justify-content-end">
-        <small class="">Already have an account ? Go and <a href="login.html">Sign in</a> instead!</small>
+        <small class="">Already have an account ? Go and <a href="login">Sign in</a> instead!</small>
       </div>
     </div>
   </div>

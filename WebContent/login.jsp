@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
+    <style>
+    	<%@ include file="./css/style.css" %>
+    </style>
     <title>Mini Blog | Admin Login</title>
 </head>
 <body>
@@ -16,12 +20,17 @@
       <h3 class="text-center">Welcome back author...</h3>
       <h6 class="text-center">If you are nobody, then go back to our <a href="index.html">homepage</a> to read our blog!</h6>
       <hr class="my-4 w-100">
-      <div class="alert alert-dismissible alert-danger">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Oh snap!</strong>
-        <p class="mb-0">Username or password incorrect!</p>
-      </div>
-      <form action="/admin.html" class="d-flex flex-column">
+      <%
+      	String loginError = (String)request.getParameter("loginError");
+      %>
+      <c:if test="${loginError.equals(\"true\")}">
+      	<div class="alert alert-dismissible alert-danger">
+	        <button type="button" class="close" data-dismiss="alert">&times;</button>
+	        <strong>Oh snap!</strong>
+	        <p class="mb-0">Username or password incorrect!</p>
+	      </div>
+      </c:if>
+      <form action="toLogin" class="d-flex flex-column" method="post">
         <div class="form-group row">
           <label for="username" class="col-sm-2 col-form-label">Username</label>
           <div class="col-sm-10">
@@ -36,7 +45,7 @@
           </div>
         </div>
         <button type="submit" class="btn btn-outline-primary align-self-end px-5">Sign in</button>
-        <p class="text-right mt-3">If you want to join us, please <a href="signup.html">Sign up</a> NOW!</p>
+        <p class="text-right mt-3">If you want to join us, please <a href="signup">Sign up</a> NOW!</p>
       </form>
     </div>
   </div>
