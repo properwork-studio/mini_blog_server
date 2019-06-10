@@ -20,6 +20,7 @@
 		SELECT * from Posts;
 	</sql:query>
 	<div class="container mt-5">
+	<img src="img/nat-8.jpg">
 		<h1 class="display-4 mb-4">Users Table</h1>
 		<table class="table mb-5">
 		  <thead>

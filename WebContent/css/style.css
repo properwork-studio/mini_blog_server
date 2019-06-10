@@ -38,5 +38,19 @@
     width: 100%;
     height: auto; }
 
+.about__card {
+  height: 370px;
+  margin-bottom: 30px; }
+  .about__card .card-body {
+    display: flex;
+    flex-direction: column; }
+
+.about__card-image {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; }
+
 .footer {
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.05); }

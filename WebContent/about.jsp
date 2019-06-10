@@ -22,21 +22,27 @@
   </div>
   <div class="authors-content mt-5 mb-5">
     <h2 class="mb-5">All the authors</h2>
-    <div class="card-deck">
+    <div class="row">
     	<c:forEach var="user" items="${listAllUsers}">
-    		<div class="card">
-    		<c:if test="${user.getUserImage() != null}">
-    			<img src="showUserImage?user_id=${user.userID}" class="card-img-top">
+          <div class="col-md-4">
+            <div class="card about__card">
+            <c:if test="${user.getUserImage() != null}">
+   				<div class="about__card-image">
+                	<img src="showUserImage?user_id=${user.userID}" class="card-img-top">
+              </div>
     		</c:if>
     		<c:if test="${user.getUserImage() == null}">
-    			<img src="https://fakeimg.pl/200x100/?retina=1&text=images&font=noto" class="card-img-top">
+    			<div class="about__card-image">
+                	<img src="https://fakeimg.pl/280x180/?retina=1&text=images&font=noto" class="card-img-top">
+              </div>
     		</c:if>
-	        <div class="card-body">
-	          <h5 class="card-title">${user.nickname}</h5>
-	          <p class="card-text">${user.introduction}</p>
-	          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-	        </div>
-	      </div>
+              <div class="card-body">
+                <h5 class="card-title">${user.nickname}</h5>
+                <p class="card-text">${user.introduction}</p>
+                <p class="card-text mt-auto"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
     	</c:forEach>
     </div>
   </div>
