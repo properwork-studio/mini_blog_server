@@ -8,8 +8,13 @@
         <h4 class="mb-0">Add something to let everyone knows you better<br>Or not...</h4>
         <hr class="mt-4 mb-5">
         <div class="row">
-          <div class="col-sm-4">
-            <img src="https://fakeimg.pl/150x100/?retina=1&text=images&font=noto" class="mb-3">
+          <div class="col-sm-4 profile__image">
+          	<c:if test="${currentUserProfile.userImage == null}">
+          		<img src="https://fakeimg.pl/150x100/?retina=1&text=images&font=noto" class="mb-3">
+          	</c:if>
+          	<c:if test="${currentUserProfile.userImage != null}">
+          		<img src="showUserImage?user_id=${currentUserProfile.userID}" class="mb-3">
+          	</c:if>
           </div>
           <div class="col-sm-8">
             <div class="form-group row">

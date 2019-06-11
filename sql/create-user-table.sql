@@ -5,7 +5,7 @@ create table Users (
 	email varchar(255),
 	nickname varchar(255),
 	introduction text,
-	user_image mediumblob,
+	user_image longblob,
 	PRIMARY KEY (user_id)
 );
 

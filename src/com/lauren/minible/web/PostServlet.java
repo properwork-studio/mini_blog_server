@@ -261,7 +261,7 @@ public class PostServlet extends HttpServlet {
 			throws SQLException, IOException {
 		int postID = Integer.parseInt(request.getParameter("post_id"));
 		postDAO.deletePost(con, postID);
-		response.sendRedirect("list");
+		response.sendRedirect("admin");
 
 	}
 	

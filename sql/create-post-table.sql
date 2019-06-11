@@ -4,7 +4,7 @@ create table Posts (
 	post_categories varchar(255) not null,
 	post_content text not null,
 	author_id int not null,
-	post_image mediumblob,
+	post_image longblob,
 	PRIMARY KEY (post_id),
 	FOREIGN KEY (author_id) REFERENCES Users (user_id)
 );

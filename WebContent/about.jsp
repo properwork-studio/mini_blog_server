@@ -37,7 +37,12 @@
               </div>
     		</c:if>
               <div class="card-body">
-                <h5 class="card-title">${user.nickname}</h5>
+              	<c:if test="${user.nickname == null}">
+              		<h5 class="card-title">${user.username}</h5>
+              	</c:if>
+              	<c:if test="${user.nickname != null}">
+              		<h5 class="card-title">${user.nickname}</h5>
+              	</c:if>
                 <p class="card-text">${user.introduction}</p>
                 <p class="card-text mt-auto"><small class="text-muted">Last updated 3 mins ago</small></p>
               </div>

@@ -52,5 +52,15 @@
   justify-content: center;
   overflow: hidden; }
 
+.profile__image {
+  overflow: hidden;
+  height: 230px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; }
+  .profile__image img {
+    width: 100%; }
+
 .footer {
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.05); }

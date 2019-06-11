@@ -83,7 +83,7 @@
         <div class="form-group row">
           <label for="image" class="col-sm-2 col-form-label">Feature Image</label>
           <div class="col-sm-10">
-            <input type="file" class="form-control-file" id="image" name="post_image" placeholder="Upload an feature image for your post...">
+            <input type="file" class="form-control-file" id="image" name="post_image" placeholder="Upload an feature image for your post..." required>
           </div>
         </div>
         <hr class="my-3 w-100">
