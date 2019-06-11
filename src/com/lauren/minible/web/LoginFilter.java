@@ -59,9 +59,7 @@ public class LoginFilter implements Filter {
 		byte[] passwordByte = password.getBytes();
 		String encodedPassword = encoder.encodeToString(passwordByte);
 		if(user != null) {
-			System.out.println("login user checking prepare");
 			if(user.getPassword().equals(encodedPassword)) {
-				System.out.println("login user checked");
 				HttpSession session = req.getSession();
 				session.setAttribute("currentUser", user.getUserID());
 				if(user.getNickname() != null) {
