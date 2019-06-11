@@ -122,8 +122,11 @@ public class PostServlet extends HttpServlet {
 			case "/showUserImage":
 				showUserImage(request, response, con);
 				break;
-			default:
+			case "/":
 				indexPost(request, response, con);
+				break;
+			default:
+				request.getRequestDispatcher("error.jsp").forward(request, response);
 				break;
 			}
 		} catch (SQLException ex) {
@@ -137,7 +140,7 @@ public class PostServlet extends HttpServlet {
 			listPosts = listPosts.subList(0, 5);
 		}
 		request.setAttribute("indexListPosts", listPosts);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("front.jsp").forward(request, response);
 	}
 	
 	private void listPosts(HttpServletRequest request, HttpServletResponse response, Connection con)
@@ -284,7 +287,7 @@ public class PostServlet extends HttpServlet {
 	private void toLogout(HttpServletRequest request, HttpServletResponse response, Connection con) throws SQLException, IOException, ServletException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		request.getRequestDispatcher("/").forward(request, response);
+		request.getRequestDispatcher("front.jsp").forward(request, response);
 	}
 	
 	private void showSignupForm(HttpServletRequest request, HttpServletResponse response, Connection con) throws SQLException, IOException, ServletException {

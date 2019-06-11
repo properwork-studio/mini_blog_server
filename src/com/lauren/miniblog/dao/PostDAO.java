@@ -99,7 +99,7 @@ public class PostDAO {
 		try (
 			// Step :Create a statement using connection object
 			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_POSTS);) {
-			System.out.println(preparedStatement);
+			System.out.println("From <selectAllPosts> " + preparedStatement);
 			// Step : Execute the query or update query
 			ResultSet rs = preparedStatement.executeQuery();
 

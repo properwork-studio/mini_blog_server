@@ -18,18 +18,19 @@
   <div class="landing__container">
     <div class="landing__form">
       <h3 class="text-center">Welcome back author...</h3>
-      <h6 class="text-center">If you are nobody, then go back to our <a href="index.html">homepage</a> to read our blog!</h6>
+      <h6 class="text-center">If you are nobody, then go back to our <a href="/FinalProject">homepage</a> to read our blog!</h6>
       <hr class="my-4 w-100">
       <%
-      	String loginError = (String)request.getParameter("loginError");
-      %>
-      <c:if test="${loginError.equals(\"true\")}">
+      	String loginError = (String)request.getParameter("login_error");
+      	System.out.println(loginError);
+      	if(loginError.equals("true")) { %>
       	<div class="alert alert-dismissible alert-danger">
 	        <button type="button" class="close" data-dismiss="alert">&times;</button>
 	        <strong>Oh snap!</strong>
 	        <p class="mb-0">Username or password incorrect!</p>
 	      </div>
-      </c:if>
+      	<%}
+      %>
       <form action="toLogin" class="d-flex flex-column" method="post">
         <div class="form-group row">
           <label for="username" class="col-sm-2 col-form-label">Username</label>

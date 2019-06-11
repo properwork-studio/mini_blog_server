@@ -15,11 +15,11 @@ public class UserDAO {
 	private static final String INSERT_USERS_SQL = "INSERT INTO Users" + "  (username, user_password, email) VALUES "
 			+ " (?, ?, ?);";
 
-	private static final String SELECT_USER_BY_ID = "select user_id,username,user_password,email,nickname,introduction,user_image from Users where user_id =?";
-	private static final String SELECT_USER_BY_USERNAME = "select user_id,username,user_password,email,nickname,introduction,user_image from Users where username =?";
-	private static final String SELECT_ALL_USERS = "select * from Users";
-	private static final String DELETE_USERS_SQL = "delete from Users where user_id = ?;";
-	private static final String UPDATE_USERS_SQL = "update Users set nickname = ?,email= ?, introduction =?, user_image =? where user_id = ?;";
+	private static final String SELECT_USER_BY_ID = "SELECT user_id,username,user_password,email,nickname,introduction,user_image FROM Users WHERE user_id =?";
+	private static final String SELECT_USER_BY_USERNAME = "SELECT user_id,username,user_password,email,nickname,introduction,user_image FROM Users WHERE username =?";
+	private static final String SELECT_ALL_USERS = "SELECT * FROM Users";
+	private static final String DELETE_USERS_SQL = "DELETE FROM Users WHERE user_id = ?;";
+	private static final String UPDATE_USERS_SQL = "UPDATE Users SET nickname = ?,email= ?, introduction =?, user_image =? WHERE user_id = ?;";
 	
 	public UserDAO() {
 		

@@ -11,31 +11,26 @@
         <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
         <hr class="my-4">
         <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <a class="btn btn-primary btn-lg mt-4" href="about.jsp" role="button">Learn more</a>
+        <a class="btn btn-primary btn-lg mt-4" href="about" role="button">Learn more</a>
       </div>
     </div>
-
-	<sql:setDataSource var="db" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/demo?useSSL=false&serverTimezone=CST" user="root" password="lomo81818" />
-	<sql:query var="rs_post" dataSource="${db}">
-		SELECT * from Posts;
-	</sql:query>
 
     <div class="container d-flex flex-column">
       <h1 class="my-5">Recent Posts</h1>
       <div class="post-list">
-      	<c:if test="${rs_post != null }">
-      		<c:forEach var="post" items="${rs_post.rows}">
+      	<c:if test="${indexListPosts != null }">
+      		<c:forEach var="post" items="${indexListPosts}">
 	      		<div class="card mb-3">
 		          <div class="card-body">
-		            <h5 class="card-title">${post.post_title}</h5>
-		            <h6 class="card-subtitle mb-2 text-muted">${post.post_categories}</h6>
-		            <p class="card-text">${post.post_content.substring(0,10)}...</p>
-		            <a href="post?post_id=${post.post_id}" class="card-link">Read more</a>
+		            <h5 class="card-title">${post.postTitle}</h5>
+		            <h6 class="card-subtitle mb-2 text-muted">${post.postCategories}</h6>
+		            <p class="card-text">${post.postContent.substring(0,10)}...</p>
+		            <a href="post?post_id=${post.postID}" class="card-link">Read more</a>
 		          </div>
 		        </div>
 	      	</c:forEach>
       	</c:if>
-      	<c:if test="${rs_post == null}">
+      	<c:if test="${indexListPosts == null}">
       		<h3 class="my-5 text-center">Have no posts yet or something is wrong....</h3>
       	</c:if>
       </div>
