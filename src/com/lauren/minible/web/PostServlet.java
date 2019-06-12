@@ -336,12 +336,18 @@ public class PostServlet extends HttpServlet {
 			}
 			userImage = new SerialBlob(buffer.toByteArray());
 		} else {
-			userImage = null;
+			User currentUser = userDAO.selectUser(con, authorID);
+			userImage = currentUser.getUserImage();
+		}
+		
+		if(!nickname.equals("")) {
+			session.setAttribute("currentUserName", nickname);
 		}
 		
 		User updateUser = new User(authorID, username, email, nickname, introduction, userImage);
 		userDAO.updateUser(con, updateUser);
-		request.getRequestDispatcher("admin").forward(request, response);
+//		request.getRequestDispatcher("admin").forward(request, response);
+		response.sendRedirect("admin");
 	}
 	
 //	=====================  show image  =============================

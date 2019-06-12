@@ -18,7 +18,14 @@
 <body>
   <nav class="navbar navbar-dark bg-primary mb-5">
     <div class="container">
-      <a class="navbar-brand mb-0 h1" href="index.html">Mini Blog</a>
+      <a class="navbar-brand mb-0 h1 mr-auto" href="index.html">Mini Blog</a>
+      <%
+        	String username = (String)session.getAttribute("currentUserName");
+        	if(username != null && !username.equals("")) {
+        		out.print("<h6 class=\"mb-0 text-white\">Welcome back, <a class=\"text-white\" href=\"admin\">" + username + "</a></h6>");
+        		out.print("<a href=\"login.jsp\" class=\"btn btn-outline-secondary px-3 mb-0 ml-3\">Logout</a>");
+        	}
+        %>
     </div>
   </nav>
 

@@ -39,7 +39,7 @@
             <div class="form-group row">
           <label for="image" class="col-sm-2 col-form-label">Feature Image</label>
           <div class="col-sm-10">
-            <input type="file" class="form-control-file" id="image" name="image" placeholder="Upload your feature image...">
+            <input type="file" class="form-control-file" id="image" name="image" placeholder="Upload your feature image..." required>
           </div>
         </div>
           </div>
@@ -47,7 +47,7 @@
         <hr class="my-3 w-100">
         <div class="form-group">
           <h6 class="mb-3 mt-3">Write something about you...</h6>
-          <textarea id="editor" name="introduction" class="form-control" rows="8" placeholder="Here goes again..." value="${currentUserProfile.introduction}"></textarea>
+          <textarea id="editor" name="introduction" class="form-control" rows="8" placeholder="Here goes again...">${currentUserProfile.introduction}</textarea>
         </div>
         <footer class="bg-light p-4 mt-5 fixed-bottom">
           <div class="container d-flex flex-column">
