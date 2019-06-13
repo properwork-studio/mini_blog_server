@@ -20,7 +20,7 @@
 <div class="container mt-5 pt-2 d-flex flex-column">
   <h1 class="mb-3">${currentPost.postTitle}</h1>
   <h6 class="mb-1 text-muted">${currentPost.postCategories}</h6>
-  <small class="text-muted">Post published at 2019.05.30</small>
+  <small class="text-muted">Post published by ${postAuthor}</small>
   <div class="post-content my-5">
   	${currentPost.postContent}
   </div>

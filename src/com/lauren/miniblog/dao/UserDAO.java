@@ -20,6 +20,7 @@ public class UserDAO {
 	private static final String SELECT_ALL_USERS = "SELECT * FROM Users";
 	private static final String DELETE_USERS_SQL = "DELETE FROM Users WHERE user_id = ?;";
 	private static final String UPDATE_USERS_SQL = "UPDATE Users SET nickname = ?,email= ?, introduction =?, user_image =? WHERE user_id = ?;";
+	private PostDAO postDAO = new PostDAO();
 	
 	public UserDAO() {
 		
@@ -112,7 +113,8 @@ public class UserDAO {
 				String nickname = rs.getString("nickname");
 				String introduction = rs.getString("introduction");
 				Blob userImage = rs.getBlob("user_image");
-				users.add(new User(id, userName, email, nickname, introduction, userImage));
+				int numOfPost = postDAO.calcNumOfPosts(con, id);
+				users.add(new User(id, userName, email, nickname, introduction, userImage, numOfPost));
 			}
 		} catch (SQLException e) {
 			printSQLException(e);

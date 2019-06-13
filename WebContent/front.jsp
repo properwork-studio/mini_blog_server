@@ -24,7 +24,7 @@
 		          <div class="card-body">
 		            <h5 class="card-title">${post.postTitle}</h5>
 		            <h6 class="card-subtitle mb-2 text-muted">${post.postCategories}</h6>
-		            <p class="card-text">${post.postContent.substring(0,10)}...</p>
+		            <p class="card-text">${post.postContent.substring(0,40)}...</p>
 		            <a href="post?post_id=${post.postID}" class="card-link">Read more</a>
 		          </div>
 		        </div>

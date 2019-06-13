@@ -23,7 +23,7 @@
         	String username = (String)session.getAttribute("currentUserName");
         	if(username != null && !username.equals("")) {
         		out.print("<h6 class=\"mb-0 text-white\">Welcome back, <a class=\"text-white\" href=\"admin\">" + username + "</a></h6>");
-        		out.print("<a href=\"login.jsp\" class=\"btn btn-outline-secondary px-3 mb-0 ml-3\">Logout</a>");
+        		out.print("<a href=\"logout\" class=\"btn btn-outline-secondary px-3 mb-0 ml-3\">Logout</a>");
         	}
         %>
       </div>

@@ -21,7 +21,7 @@
 	          <th scope="row">${post.postID}</th>
 	          <td>${post.postTitle}</td>
 	          <td>${post.postCategories}</td>
-	          <td>${post.postContent.substring(0,10)}...</td>
+	          <td>${post.postContent.substring(0,40)}...</td>
 	          <td class="text-center">
 	            <a href="edit?post_id=${post.postID}" class="mr-3"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 	            <a href="" data-toggle="modal" data-target="#deleteConfirm-${post.postID}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -30,6 +30,7 @@
       	</c:forEach>
       </tbody>
     </table>
+    <% /*
     <div class="align-self-center">
       <ul class="pagination">
         <li class="page-item">
@@ -47,8 +48,8 @@
         </li>
       </ul>
     </div>
-  </div>
-  
+  </div> */
+  %>
   <c:forEach var="deletePost" items="${listAdminPosts}">
 	  <div class="modal fade" id="deleteConfirm-${deletePost.postID}" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel"
 	    aria-hidden="true">

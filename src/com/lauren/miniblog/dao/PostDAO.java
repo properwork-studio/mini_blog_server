@@ -15,11 +15,12 @@ public class PostDAO {
 	private static final String INSERT_POSTS_SQL = "INSERT INTO Posts" + "  (post_title, post_categories, post_content, post_image, author_id) VALUES "
 			+ " (?, ?, ?, ?, ?);";
 
-	private static final String SELECT_POST_BY_ID = "SELECT post_id,post_title,post_categories,post_content,post_image FROM Posts WHERE post_id =?";
-	private static final String SELECT_POSTS_BY_AUTHOR_ID = "SELECT post_id,post_title,post_categories,post_content,post_image FROM Posts WHERE author_id =?";
-	private static final String SELECT_ALL_POSTS = "SELECT * FROM Posts";
+	private static final String SELECT_POST_BY_ID = "SELECT post_id,post_title,post_categories,post_content,author_id,post_image FROM Posts WHERE post_id =?";
+	private static final String SELECT_POSTS_BY_AUTHOR_ID = "SELECT post_id,post_title,post_categories,post_content,post_image FROM Posts WHERE author_id =? ORDER BY post_id DESC";
+	private static final String SELECT_ALL_POSTS = "SELECT * FROM Posts ORDER BY post_id DESC";
 	private static final String DELETE_POSTS_SQL = "DELETE FROM Posts WHERE post_id = ?;";
 	private static final String UPDATE_POSTS_SQL = "UPDATE Posts SET post_title = ?,post_categories= ?, post_content =?, post_image =? WHERE post_id = ?;";
+	private static final String CALC_NUM_OF_POSTS = "SELECT count(*) AS total FROM posts WHERE author_id=?";
 	
 	public PostDAO() {
 		
@@ -56,8 +57,9 @@ public class PostDAO {
 				String postTitle = rs.getString("post_title");
 				String postCategories = rs.getString("post_categories");
 				String postContent = rs.getString("post_content");
+				int postAuthor = rs.getInt("author_id");
 				Blob postImage = rs.getBlob("post_image");
-				post = new Post(id, postTitle, postCategories, postContent, postImage);
+				post = new Post(id, postTitle, postCategories, postContent, postAuthor, postImage);
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -143,6 +145,19 @@ public class PostDAO {
 			rowUpdated = statement.executeUpdate() > 0;
 		}
 		return rowUpdated;
+	}
+	
+	public int calcNumOfPosts(Connection con, int id) throws SQLException {
+		int postNum = 0;
+		try (
+			PreparedStatement statement = con.prepareStatement(CALC_NUM_OF_POSTS);) {
+			statement.setInt(1, id);
+			ResultSet rs = statement.executeQuery();
+			while(rs.next()) {
+				postNum = rs.getInt("total");
+			}
+		}
+		return postNum;
 	}
 	
 	

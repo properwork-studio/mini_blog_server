@@ -10,6 +10,7 @@ public class User {
 	private String nickname;
 	private String introduction;
 	private Blob userImage;
+	private int numOfPosts;
 	
 	public User() {
 		
@@ -39,6 +40,18 @@ public class User {
 		this.nickname = nickname;
 		this.introduction = introduction;
 		this.userImage = userImage;
+	}
+	
+	public User(int userID, String username, String email, String nickname, String introduction,
+			Blob userImage, int numOfPost) {
+		super();
+		this.userID = userID;
+		this.username = username;
+		this.email = email;
+		this.nickname = nickname;
+		this.introduction = introduction;
+		this.userImage = userImage;
+		this.numOfPosts = numOfPost;
 	}
 	
 	public User(int userID, String username, String password, String email, String nickname, String introduction,
@@ -95,6 +108,15 @@ public class User {
 	public void setUserImage(Blob userImage) {
 		this.userImage = userImage;
 	}
+
+	public int getNumOfPosts() {
+		return numOfPosts;
+	}
+
+	public void setNumOfPosts(int numOfPosts) {
+		this.numOfPosts = numOfPosts;
+	}
+	
 	
 	
 }

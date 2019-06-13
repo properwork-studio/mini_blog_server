@@ -7,9 +7,11 @@ import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -166,11 +168,17 @@ public class PostServlet extends HttpServlet {
 		Post currentPost = postDAO.selectPost(con, id);
 		Post previousPost = postDAO.selectPost(con, previousID);
 		Post nextPost = postDAO.selectPost(con, nextID);
+		User postAuthor = userDAO.selectUser(con, currentPost.getAuthorID());
 		HttpSession session = request.getSession();
 		session.setAttribute("current", currentPost);
 		request.setAttribute("currentPost", currentPost);
 		request.setAttribute("previousPost", previousPost);
 		request.setAttribute("nextPost", nextPost);
+		if(postAuthor.getNickname() == null) {
+			request.setAttribute("postAuthor", postAuthor.getUsername());
+		} else {
+			request.setAttribute("postAuthor", postAuthor.getNickname());
+		}
 		request.getRequestDispatcher("single.jsp").forward(request, response);
 	}
 	
@@ -287,7 +295,7 @@ public class PostServlet extends HttpServlet {
 	private void toLogout(HttpServletRequest request, HttpServletResponse response, Connection con) throws SQLException, IOException, ServletException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		request.getRequestDispatcher("front.jsp").forward(request, response);
+		response.sendRedirect("login");
 	}
 	
 	private void showSignupForm(HttpServletRequest request, HttpServletResponse response, Connection con) throws SQLException, IOException, ServletException {

@@ -44,7 +44,7 @@
               		<h5 class="card-title">${user.nickname}</h5>
               	</c:if>
                 <p class="card-text">${user.introduction}</p>
-                <p class="card-text mt-auto"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <p class="card-text mt-auto"><small class="text-muted">Have published ${user.numOfPosts} posts</small></p>
               </div>
             </div>
           </div>
