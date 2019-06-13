@@ -20,7 +20,7 @@ public class PostDAO {
 	private static final String SELECT_ALL_POSTS = "SELECT * FROM Posts ORDER BY post_id DESC";
 	private static final String DELETE_POSTS_SQL = "DELETE FROM Posts WHERE post_id = ?;";
 	private static final String UPDATE_POSTS_SQL = "UPDATE Posts SET post_title = ?,post_categories= ?, post_content =?, post_image =? WHERE post_id = ?;";
-	private static final String CALC_NUM_OF_POSTS = "SELECT count(*) AS total FROM posts WHERE author_id=?";
+	private static final String CALC_NUM_OF_POSTS = "SELECT COUNT(*) AS total FROM posts WHERE author_id=?";
 	
 	public PostDAO() {
 		
